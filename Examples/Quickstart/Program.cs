@@ -18,7 +18,7 @@
 using System;
 using NConsoler;
 
-namespace Multiplier
+namespace Quickstart
 {
     class Program
     {
@@ -28,16 +28,11 @@ namespace Multiplier
         }
 
         [Action]
-        public static void Multiple(
-            [Required(Description = "1st multiplier")] int factor1,
-            [Required(Description = "2nd multiplier")] int factor2,
-            [Optional(true, Description = "Show program logo")] bool showlogo)
+        public static void DoWork(
+              [Required] int count,
+              [Optional(false)] bool flag)
         {
-            if (showlogo)
-            {
-                Console.WriteLine("Multiplier example");
-            }
-            Console.WriteLine(factor1 * factor2);
+            Console.WriteLine("DoWork {0} {1}", count, flag);
         }
     }
 }

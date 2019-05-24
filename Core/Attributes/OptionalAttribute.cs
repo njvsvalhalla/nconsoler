@@ -15,29 +15,22 @@
 //      Neal Daniel (neal@nealmdaniel.com). All Rights Reserved.
 //      Contributor(s): Neal Daniel (neal@nealmdaniel.com).
 
-using System;
-using NConsoler;
-
-namespace Multiplier
+namespace NConsoler
 {
-    class Program
-    {
-        static void Main(string[] args)
-        {
-            Consolery.Run(typeof(Program), args);
-        }
+	/// <summary>
+	/// Marks an Action method parameter as optional
+	/// </summary>
+	public sealed class OptionalAttribute : ParameterAttribute
+	{
+		public string[] AltNames { get; set; }
+		public object Default { get; private set; }
 
-        [Action]
-        public static void Multiple(
-            [Required(Description = "1st multiplier")] int factor1,
-            [Required(Description = "2nd multiplier")] int factor2,
-            [Optional(true, Description = "Show program logo")] bool showlogo)
-        {
-            if (showlogo)
-            {
-                Console.WriteLine("Multiplier example");
-            }
-            Console.WriteLine(factor1 * factor2);
-        }
-    }
+		/// <param name="defaultValue">Default value if client doesn't pass this value</param>
+		/// <param name="altNames">Aliases for parameter</param>
+		public OptionalAttribute(object defaultValue, params string[] altNames)
+		{
+			Default = defaultValue;
+			AltNames = altNames;
+		}
+	}
 }

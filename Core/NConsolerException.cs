@@ -15,29 +15,27 @@
 //      Neal Daniel (neal@nealmdaniel.com). All Rights Reserved.
 //      Contributor(s): Neal Daniel (neal@nealmdaniel.com).
 
-using System;
-using NConsoler;
-
-namespace Multiplier
+namespace NConsoler
 {
-    class Program
-    {
-        static void Main(string[] args)
-        {
-            Consolery.Run(typeof(Program), args);
-        }
+	using System;
 
-        [Action]
-        public static void Multiple(
-            [Required(Description = "1st multiplier")] int factor1,
-            [Required(Description = "2nd multiplier")] int factor2,
-            [Optional(true, Description = "Show program logo")] bool showlogo)
-        {
-            if (showlogo)
-            {
-                Console.WriteLine("Multiplier example");
-            }
-            Console.WriteLine(factor1 * factor2);
-        }
-    }
+	/// <summary>
+	/// Can be used for safe exception throwing - NConsoler will catch the exception
+	/// </summary>
+	public sealed class NConsolerException : Exception
+	{
+		public NConsolerException()
+		{
+		}
+
+		public NConsolerException(string message, Exception innerException)
+			: base(message, innerException)
+		{
+		}
+
+		public NConsolerException(string message, params string[] arguments)
+			: base(string.Format(message, arguments))
+		{
+		}
+	}
 }

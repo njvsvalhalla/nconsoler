@@ -15,29 +15,17 @@
 //      Neal Daniel (neal@nealmdaniel.com). All Rights Reserved.
 //      Contributor(s): Neal Daniel (neal@nealmdaniel.com).
 
-using System;
-using NConsoler;
-
-namespace Multiplier
+namespace NConsoler
 {
-    class Program
-    {
-        static void Main(string[] args)
-        {
-            Consolery.Run(typeof(Program), args);
-        }
+	using System.Collections.Generic;
+	using System.Reflection;
 
-        [Action]
-        public static void Multiple(
-            [Required(Description = "1st multiplier")] int factor1,
-            [Required(Description = "2nd multiplier")] int factor2,
-            [Optional(true, Description = "Show program logo")] bool showlogo)
-        {
-            if (showlogo)
-            {
-                Console.WriteLine("Multiplier example");
-            }
-            Console.WriteLine(factor1 * factor2);
-        }
-    }
+	public interface INotationStrategy
+	{
+		void PrintUsage();
+		MethodInfo GetCurrentMethod();
+		void ValidateInput(MethodInfo method);
+		object[] BuildParameterArray(MethodInfo method);
+		IEnumerable<string> OptionalParameters(MethodInfo method);
+	}
 }
